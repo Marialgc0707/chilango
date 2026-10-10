@@ -1,0 +1,597 @@
+/* ==========================================================================
+   CHILANGO · Menú Mexicano
+   --------------------------------------------------------------------------
+   ÍNDICE
+   1. Variables
+   2. Base (reset, body y fondo decorativo)
+   3. Tipografía
+   4. Estructura: nav, hero, secciones y footer
+   5. Componentes: botones, tarjetas y menú
+   6. Carrito de pedidos
+   7. Responsive (móvil)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. VARIABLES
+   ========================================================================== */
+:root{
+  --verde:#07834e;
+  --verde2:#075f3b;
+  --rojo:#d9282f;
+  --rojo2:#a81724;
+  --crema:#fffdf8;
+  --oro:#d8a33d;
+  --negro:#26332b;
+  --blanco:#fff;
+  --gris:#e7e4dc;
+  --mex-white:#fff;
+}
+
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:76px;
+}
+
+body{
+  margin:0;
+  overflow-x:hidden;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:#27352c;
+  background-color:#fffdf8;
+  background-image:
+    radial-gradient(ellipse at 8% 8%,rgba(0,132,78,.07),transparent 24%),
+    radial-gradient(ellipse at 92% 25%,rgba(217,40,47,.06),transparent 23%),
+    linear-gradient(135deg,#fffdf8,#fff 52%,#fffaf0);
+  background-attachment:fixed;
+}
+
+/* Texto decorativo inclinado de fondo */
+body::before{
+  content:"✦   ✿   🌵   ✦   🌶️   ✿   🌮   ✦   🌼   🇲🇽   ✿   🌵   ✦";
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(28px,5vw,64px);line-height:2;
+  letter-spacing:12px;text-align:center;
+  color:#07834e;
+  opacity:.065;
+  transform:rotate(-17deg) scale(1.25);
+}
+
+/* Patrón de rayas de fondo */
+body::after{
+  content:"";
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  opacity:.17;
+  background:
+    repeating-linear-gradient(135deg,transparent 0 38px,rgba(0,132,78,.08) 38px 40px,transparent 40px 78px,rgba(217,40,47,.07) 78px 80px),
+    radial-gradient(circle at 50% 0,rgba(216,163,61,.11),transparent 45%);
+}
+
+
+/* ==========================================================================
+   3. TIPOGRAFÍA
+   ========================================================================== */
+h1,h2,h3{color:#233b2c}
+
+h1{
+  font-size:clamp(48px,11vw,105px);
+  margin:18px 0 5px;
+  font-style:normal;
+  letter-spacing:-2px;
+  text-shadow:2px 2px 0 rgba(214,166,74,.22);
+}
+
+h2{
+  position:relative;
+  text-align:center;
+  font-size:38px;
+  margin-top:0;
+  font-weight:850;
+  letter-spacing:-.6px;
+}
+h2::after{
+  content:"🌶️  ✦  🌵  ✦  🌮";
+  display:block;margin:7px auto 0;
+  font:700 13px Arial,sans-serif;letter-spacing:4px;
+  color:#b67b20;opacity:.9;
+}
+
+.kicker{
+  letter-spacing:2px;
+  color:var(--verde);
+  text-transform:uppercase;
+  font-size:14px;
+  font-weight:900;
+}
+
+.subtitle{
+  font-size:clamp(24px,4vw,40px);
+  color:var(--rojo);
+  font-weight:800;
+}
+
+.divider{
+  width:86px;height:4px;
+  margin:15px auto 35px;
+  border-radius:8px;
+  background:linear-gradient(90deg,var(--verde) 0 38%,#fff 38% 62%,var(--rojo) 62%);
+  box-shadow:0 0 0 1px #e8e9e4;
+}
+
+
+/* ==========================================================================
+   4. ESTRUCTURA
+   ========================================================================== */
+
+/* ---------- Navegación ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;width:100%;z-index:10;
+  display:flex;justify-content:center;gap:8px;padding:12px;
+  background:rgba(255,255,255,.96);
+  border-bottom:3px solid transparent;
+  border-image:linear-gradient(90deg,var(--verde) 0 34%,#fff 34% 66%,var(--rojo) 66% 100%) 1;
+  box-shadow:0 8px 24px rgba(35,55,40,.12);
+  backdrop-filter:blur(12px);
+}
+nav::before{
+  content:"🌵";
+  position:absolute;left:14px;top:9px;font-size:21px;
+}
+nav a{
+  color:#24513a;text-decoration:none;
+  padding:9px 14px;font-size:14px;font-weight:800;
+  background:#f5faf5;
+  border:1px solid #dbe9dd;border-radius:999px;
+  box-shadow:0 2px 0 rgba(0,0,0,.025);
+  transition:transform .18s,background .18s,box-shadow .18s;
+}
+nav a:hover{
+  background:var(--verde);color:#fff;border-color:var(--verde);
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(0,104,71,.18);
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  min-height:88vh;
+  display:grid;place-items:center;text-align:center;
+  padding:100px 20px 40px;
+  background:
+    radial-gradient(circle at 12% 35%,rgba(0,132,78,.12),transparent 25%),
+    radial-gradient(circle at 88% 62%,rgba(217,40,47,.10),transparent 24%),
+    linear-gradient(135deg,#fffdf8,#fff 58%,#fff8ee);
+}
+.hero p{color:#68756b;font-size:18px}
+
+/* Cactus y chile decorativos a los lados */
+.hero::before,.hero::after{
+  position:absolute;top:105px;
+  font-size:clamp(42px,7vw,80px);
+  white-space:nowrap;
+  opacity:.32;
+}
+.hero::before{
+  content:"🌵";left:4%;
+  color:var(--verde);
+  filter:drop-shadow(0 5px 3px #dbe8d8);
+}
+.hero::after{
+  content:"🌶️";right:4%;
+  filter:drop-shadow(0 5px 3px #f1d6d3);
+}
+
+.hero-card{
+  position:relative;overflow:hidden;
+  width:min(900px,100%);max-width:900px;
+  padding:clamp(28px,5vw,56px);
+  color:#27352c;
+  background:rgba(255,255,255,.94);
+  border:2px solid #e5eadf;
+  border-top:5px solid var(--verde);
+  border-bottom:5px solid var(--rojo);
+  border-radius:28px;
+  box-shadow:0 20px 60px rgba(35,55,40,.12);
+}
+.hero-card::before{
+  content:"CHILANGO  •  TEX MEX  •  🌶️  •  🌵  •  🌮";
+  display:block;
+  position:absolute;left:50%;top:10px;transform:translateX(-50%);
+  width:100%;margin-bottom:4px;
+  text-align:center;white-space:nowrap;
+  color:var(--oro);opacity:.16;
+  font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;
+  pointer-events:none;
+}
+.hero-card::after{
+  content:"✦  PAPEL PICADO  ✦  🌵  ✦  🌶️  ✦  🌮  ✦";
+  display:block;margin:18px auto 0;padding:10px 12px;max-width:540px;
+  color:#9b6b18;
+  background:repeating-linear-gradient(90deg,#e5f3e8 0 22px,#fff 22px 28px,#fde7e7 28px 50px,#fff 50px 56px);
+  border:1px dashed #e1c58b;border-radius:12px;
+  font:800 12px Arial,sans-serif;letter-spacing:2px;
+}
+
+.restaurant-logo{
+  width:min(340px,82vw);height:auto;max-height:340px;
+  display:block;margin:0 auto 22px;
+  object-fit:contain;
+  border:3px solid #fff;outline:2px solid #e6e9e3;border-radius:20px;
+  box-shadow:0 12px 35px rgba(20,70,40,.12);
+}
+
+/* ---------- Secciones ---------- */
+section{
+  position:relative;overflow:hidden;
+  max-width:1180px;margin:18px auto;padding:20px 14px;
+  background:rgba(255,255,255,.52);
+  border:1px solid rgba(219,231,217,.75);
+  border-radius:22px;
+}
+section::before{
+  content:"✿  🌵  ✦  CHILANGO TEX-MEX  ✦  🌮  ✿";
+  position:absolute;left:-10%;right:4%;top:30px;
+  text-align:center;white-space:nowrap;
+  font-family:Arial,sans-serif;font-weight:800;font-size:75px;
+  letter-spacing:5px;
+  color:var(--verde);opacity:.045;
+  transform:rotate(8deg);pointer-events:none;
+}
+section:nth-of-type(even)::before{
+  content:"🇲🇽";
+  color:var(--rojo);opacity:.035;
+  transform:rotate(-8deg);
+}
+
+.mexican-menu{position:relative}
+.mexican-menu::after{
+  content:"🌶️     🌵     🌮     🪅     🌵     🌶️     🌮";
+  position:absolute;left:-10%;right:-10%;bottom:18px;
+  text-align:center;
+  font-size:clamp(22px,4vw,42px);letter-spacing:10px;
+  opacity:.045;
+  transform:rotate(-2deg);pointer-events:none;
+}
+
+.mexican-title{
+  font-family:Arial,sans-serif;font-weight:900;
+  text-transform:uppercase;letter-spacing:1px;
+  color:#1b3828;
+}
+
+.acciones{
+  text-align:center;
+  padding-top:40px;padding-bottom:75px;
+}
+
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.action-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;max-width:760px;margin:0 auto;
+}
+
+/* ---------- Footer ---------- */
+footer{
+  position:relative;overflow:hidden;
+  text-align:center;padding:40px 20px;
+  color:#68716a;
+  background:#fffdf8;
+  border-top:4px solid transparent;
+  border-image:linear-gradient(90deg,var(--verde) 0 34%,#fff 34% 66%,var(--rojo) 66% 100%) 1;
+}
+footer::before{
+  content:"✦  🌵  •  🌮  •  🌶️  •  🇲🇽  •  🌼  ✦";
+  display:block;text-align:center;margin-bottom:15px;
+  color:#b17a20;opacity:.8;
+  font-size:24px;letter-spacing:3px;
+}
+
+
+/* ==========================================================================
+   5. COMPONENTES
+   ========================================================================== */
+
+/* ---------- Botón principal (.btn) ---------- */
+.btn{
+  display:inline-block;margin-top:25px;padding:13px 25px;min-height:56px;
+  color:#fff;text-decoration:none;font-weight:800;
+  background:var(--verde);
+  border:0;border-radius:999px;
+  box-shadow:0 8px 20px rgba(20,122,75,.18);
+  transition:.2s;
+}
+.btn:hover{
+  background:var(--rojo);color:#fff;
+  transform:translateY(-2px);
+}
+
+/* ---------- Botones de acción (ubicación, WhatsApp, etc.) ---------- */
+.mexican-btn{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;gap:16px;
+  min-height:56px;padding:20px 23px;
+  color:#23382b;text-decoration:none;text-align:left;
+  background:linear-gradient(115deg,#fff 0%,#f4faf4 100%);
+  border:1px solid #d9e8d9;border-radius:18px;
+  box-shadow:0 8px 18px rgba(30,80,45,.08);
+  transition:transform .2s,box-shadow .2s;
+}
+.mexican-btn:hover{
+  transform:translateY(-3px);
+  background:#f5fbf6;color:#173b27;
+  box-shadow:0 15px 30px rgba(20,122,75,.14);
+}
+.mexican-btn strong{display:block;font-size:20px;color:#20392a}
+.mexican-btn small{display:block;margin-top:4px;font-size:13px;color:#667168}
+
+.btn-icon{
+  width:48px;height:48px;flex:none;
+  display:grid;place-items:center;
+  font-size:23px;color:var(--verde);
+  background:#fff;
+  border:2px solid #dbe9dc;border-radius:14px;
+  box-shadow:inset 0 -3px 0 #edf5ed;
+}
+
+/* ---------- Tarjetas del menú ---------- */
+.card,
+.mexican-card{
+  position:relative;overflow:hidden;
+  padding:24px;text-align:center;
+  color:#26352b;
+  background:linear-gradient(155deg,#fff 0%,#fffefa 100%);
+  border:1px solid #e4e9df;border-radius:20px;
+  box-shadow:0 8px 22px rgba(42,65,45,.075);
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+/* Cada tercera tarjeta alterna el color del borde superior */
+.card:nth-child(3n),
+.mexican-card:nth-child(3n){
+  border-top-color:var(--rojo);
+  border-bottom-color:#e5e9e4;
+}
+/* Franja tricolor en el lado izquierdo */
+.card::before,
+.mexican-card::before{
+  content:"";
+  position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(180deg,var(--verde) 0 42%,#fff 42% 58%,var(--rojo) 58% 100%);
+  opacity:.85;
+}
+/* Producto agregado al carrito. Va antes de :hover para que al pasar el mouse suba un poco más */
+.order-item{cursor:pointer}
+.order-item:focus{outline:2px solid var(--oro);outline-offset:3px}
+.order-item.selected{
+  outline:3px solid var(--oro);outline-offset:2px;
+  transform:translateY(-3px);
+}
+.card:hover,
+.mexican-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 30px rgba(42,65,45,.13);
+  border-color:#cbdcc9;
+}
+
+.card h3,
+.mexican-card h3{color:#25382b}
+.card h3{margin:0 0 10px;font-size:22px;font-weight:800;line-height:1.25}
+.mexican-card h3{font-family:Arial,sans-serif;font-weight:800}
+
+.card p,
+.mexican-card p{color:#667168}
+.card p{margin:8px 0;line-height:1.65}
+
+.category-icon{
+  display:block;margin-bottom:8px;
+  font-size:34px;filter:saturate(.9);
+}
+.category-badge{
+  display:inline-block;margin-bottom:14px;padding:6px 13px;
+  color:var(--verde);
+  font-family:Arial,sans-serif;font-size:12px;font-weight:800;
+  letter-spacing:1px;text-transform:uppercase;
+  background:#f0f8f2;
+  border:1px solid #d6e8da;border-radius:999px;
+}
+
+.price{
+  display:inline-block;margin-top:12px;padding:4px 9px;
+  color:var(--rojo);font-size:21px;font-weight:900;
+  background:#fff0ed;
+  border:1px solid #f5d8d4;border-radius:999px;
+}
+
+/* Producto seleccionado: el resplandor va después de :hover para que se mantenga al pasar el mouse */
+.order-item.selected{
+  box-shadow:0 0 0 5px rgba(20,122,75,.10),0 12px 30px rgba(20,70,40,.10);
+}
+
+/* ---------- Botones dentro de cada tarjeta ---------- */
+.product-actions{
+  display:flex;gap:9px;flex-wrap:wrap;margin-top:15px;
+}
+.product-actions button{
+  flex:1;min-width:145px;min-height:43px;padding:10px 13px;
+  font-family:inherit;font-weight:900;letter-spacing:.2px;
+  cursor:pointer;
+  border:0;border-radius:14px;
+  box-shadow:0 4px 0 rgba(0,0,0,.08);
+  transition:transform .16s,box-shadow .16s,filter .16s;
+}
+.product-actions button:hover{
+  transform:translateY(-2px);
+  filter:saturate(1.12);
+  box-shadow:0 7px 14px rgba(20,50,30,.14);
+}
+.product-actions button:active{
+  transform:translateY(1px);
+  box-shadow:0 2px 0 rgba(0,0,0,.08);
+}
+.add-cart-btn{
+  color:#fff;
+  background:linear-gradient(135deg,#087c49,#0a9b60);
+}
+.add-cart-btn::before{content:"🌮  "}
+.direct-wa-btn{
+  color:#fff;
+  background:linear-gradient(135deg,#d92932,#b51e29);
+}
+.direct-wa-btn::before{content:"🌶️  "}
+
+
+/* ==========================================================================
+   6. CARRITO DE PEDIDOS
+   ========================================================================== */
+
+/* Botón flotante */
+.cart-fab{
+  position:fixed;right:18px;bottom:18px;z-index:50;
+  display:flex;align-items:center;gap:9px;
+  padding:13px 18px;
+  color:#fff;font-family:Arial,sans-serif;font-weight:900;
+  background:linear-gradient(135deg,#d9282f,#a81724);
+  border:3px solid #fff;border-radius:18px 18px 6px 18px;
+  box-shadow:0 10px 28px rgba(100,30,30,.25);
+  cursor:pointer;
+}
+.cart-fab::before{content:"🌮 "}
+.cart-fab:hover{transform:translateY(-2px)}
+
+.cart-count{
+  min-width:24px;height:24px;padding:0 7px;
+  display:grid;place-items:center;
+  font-size:13px;font-weight:900;
+  color:var(--rojo);background:#fff;
+  border:2px solid #f4d5d5;border-radius:12px;
+}
+
+/* Panel y caja */
+.cart-panel{
+  position:fixed;inset:0;z-index:100;
+  display:none;align-items:flex-end;justify-content:center;
+  padding:15px;
+  background:rgba(25,48,33,.45);
+  backdrop-filter:blur(7px);
+}
+.cart-panel.open{display:flex}
+
+.cart-box{
+  width:min(560px,100%);max-height:min(82vh,720px);overflow:auto;
+  padding:22px;
+  color:#25352a;
+  background:#fff;
+  border:1px solid #e0e8df;
+  border-top:6px solid var(--verde);
+  border-bottom:6px solid var(--rojo);
+  border-radius:24px;
+  box-shadow:0 25px 70px rgba(20,40,25,.25);
+}
+
+/* Encabezado */
+.cart-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:15px;margin-bottom:12px;
+}
+.cart-head h3{margin:0;font-size:28px;color:#20392a}
+.cart-close{
+  width:38px;height:38px;
+  font-size:22px;color:#23382b;
+  background:#f3f7f3;
+  border:1px solid #dce6dc;border-radius:12px;
+  cursor:pointer;
+}
+
+/* Lista de productos */
+.cart-empty{text-align:center;padding:25px 8px;color:#68716a}
+.cart-row{
+  display:grid;grid-template-columns:1fr auto;
+  gap:10px;align-items:center;padding:13px 0;
+  border-bottom:1px dashed #dce5dc;
+}
+.cart-row strong{display:block;color:#25372b}
+.cart-row small{color:#6b756d}
+
+/* Botones + y − */
+.qty-controls{display:flex;align-items:center;gap:8px}
+.qty-controls b{min-width:22px;text-align:center;font-size:16px;color:#25372b}
+.qty-controls button{
+  width:36px;height:36px;
+  color:#fff;font-weight:800;
+  background:var(--verde);
+  border:0;border-radius:10px;
+  cursor:pointer;
+}
+
+/* Total y acciones */
+.cart-total{
+  display:flex;justify-content:space-between;
+  margin:18px 0;
+  font-size:21px;font-weight:800;color:#20392a;
+}
+.cart-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cart-actions button{
+  padding:13px;
+  font-weight:900;
+  border:0;border-radius:13px;
+  cursor:pointer;
+}
+.cart-clear{background:#fbecee;color:#9e1d2b}
+.cart-whatsapp{
+  color:#fff;
+  background:linear-gradient(135deg,#07834e,#075f3b);
+}
+.cart-note{
+  margin:12px 0 0;
+  text-align:center;font-size:12px;color:#737d75;
+}
+
+
+/* ==========================================================================
+   7. RESPONSIVE (móvil: hasta 600px)
+   ========================================================================== */
+@media(max-width:600px){
+
+  /* Navegación con scroll horizontal */
+  nav{
+    overflow-x:auto;justify-content:flex-start;
+    padding:10px 8px 10px 42px;gap:5px;
+    scrollbar-width:none;
+  }
+  nav::-webkit-scrollbar{display:none}
+  nav a{white-space:nowrap;font-size:11px;padding:8px 10px}
+
+  /* Hero */
+  h1{letter-spacing:-1px}
+  .hero{min-height:82vh;padding:88px 12px 28px}
+  .hero::before,.hero::after{top:95px}
+  .hero-card{width:100%;padding:28px 16px;border-radius:22px}
+  .hero-card::after{font-size:10px;letter-spacing:1px}
+  .restaurant-logo{width:min(260px,78vw);max-height:260px;margin-bottom:16px}
+
+  /* Menú */
+  h2{font-size:32px}
+  .card-grid{grid-template-columns:1fr;gap:15px}
+  .card,
+  .mexican-card{padding:21px 18px;border-radius:17px}
+  .product-actions button{min-width:0}
+  .action-grid{grid-template-columns:1fr;gap:15px}
+
+  /* Carrito */
+  .cart-fab{right:12px;bottom:12px}
+  .cart-box{padding:17px}
+  .cart-head h3{font-size:24px}
+  .cart-actions{grid-template-columns:1fr}
+}
